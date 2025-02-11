@@ -1,13 +1,16 @@
-FROM node:14
+# pull an image from local or Docker Registry to based on it
+FROM node 
 
 WORKDIR /app
 
-COPY package.json .
+#Copy the files other cofiguration files outside the container into the location you need inside the container. It creates the folder in the image and container without mkdir or another command
+COPY . /app
 
+#run NPM Install
 RUN npm install
 
-COPY . .
+#Expose a certain port to our local system.
+EXPOSE 80
 
-EXPOSE 3000
-
-CMD [ "node", "app.mjs" ]
+#Command to execute the node server.js command. I mean, execute the application/container
+CMD ["node", "server.js"]
